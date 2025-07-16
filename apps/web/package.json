@@ -1,0 +1,16 @@
+{
+  "name": "@sweet-shop/admin",
+  "version": "0.1.0",
+  "description": "Admin dashboard for Sweet Shop Management System",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Starting admin development server\" && exit 0",
+    "build": "echo \"Building admin app\" && exit 0",
+    "start": "echo \"Running admin app\" && exit 0",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

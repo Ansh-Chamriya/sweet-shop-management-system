@@ -1,0 +1,24 @@
+{
+  "name": "sweet-shop-management-system",
+  "version": "1.0.0",
+  "description": "Management system for a sweet shop",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r dev",
+    "start": "pnpm -r start",
+    "test": "pnpm -r test"
+  },
+  "keywords": [
+    "sweet-shop",
+    "management-system",
+    "pnpm",
+    "workspace",
+    "monorepo"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}
