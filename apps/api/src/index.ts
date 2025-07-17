@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { BetterSQLite3Database, drizzle } from "drizzle-orm/better-sqlite3";
 import { z } from "zod";
-
+import { serve } from "@hono/node-server";
 import * as schema from "./db/schema";
 import { SweetService } from "./services/sweetService";
 import { createSweetSchema, updateSweetSchema } from "./validation/schema";
+import Database from "better-sqlite3";
 
 // --- Factory Function for creating the App ---
 // This function takes a database instance and returns a configured Hono app.
@@ -157,3 +158,18 @@ export const createApp = (db: BetterSQLite3Database<typeof schema>) => {
 
   return app;
 };
+const sqlite = new Database("sweet-shop.db");
+const db = drizzle(sqlite, { schema });
+const app = createApp(db);
+
+if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  console.log(`Server is running on http://localhost:${port}`);
+
+  serve({
+    fetch: app.fetch,
+    port: Number(port),
+  });
+}
+
+export default app;
