@@ -16,7 +16,9 @@ export const createApp = (db: BetterSQLite3Database<typeof schema>) => {
   const sweetService = new SweetService(db);
   const app = new Hono();
 
-  // Add CORS middleware to allow requests from the frontend
+  // --- API Routes ---
+  const apiRoutes = app.basePath("/api");
+
   app.use(
     "/*",
     cors({
@@ -32,9 +34,6 @@ export const createApp = (db: BetterSQLite3Database<typeof schema>) => {
       credentials: true,
     })
   );
-
-  // --- API Routes ---
-  const apiRoutes = app.basePath("/api");
 
   /*
    * 1. CREATE a new sweet

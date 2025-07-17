@@ -1,16 +1,26 @@
 # Sweet Shop Management System
 
-A comprehensive management system for sweet shops built as a pnpm monorepo.
+A comprehensive management system for sweet shops built as a pnpm monorepo, featuring a Hono-powered API backend with Drizzle ORM and a React frontend with Tailwind CSS.
 
 ## Project Structure
 
 ```
 sweet-shop-management-system/
-├── apps/               # Frontend and backend applications
-├── packages/           # Shared libraries and utilities
-├── package.json        # Root package.json
-└── pnpm-workspace.yaml # Workspace configuration
+├── apps/                     # Frontend and backend applications
+│   ├── api/                  # Hono API backend with Drizzle ORM
+│   ├── sweet-shop-api-core/  # Core components shared between projects
+│   └── web/                  # React frontend with Tailwind CSS
+├── package.json              # Root package.json
+└── pnpm-workspace.yaml       # Workspace configuration
 ```
+
+## 🚀 Features
+
+- **Inventory Management**: Add, update, delete, and track sweets in your shop
+- **Search & Filter**: Find products by name, category, and price
+- **Stock Management**: Purchase and restock functionality with stock tracking
+- **Dark/Light Mode**: Theme switching for better user experience
+- **Responsive Design**: Works on desktop and mobile devices
 
 ## Getting Started
 
@@ -30,36 +40,16 @@ pnpm install
 
 ```bash
 # Run development servers for all applications
-pnpm dev
+pnpm -r dev
 
 # Build all packages and applications
-pnpm build
+pnpm -r build
 
 # Run tests across all packages and applications
-pnpm test
+pnpm -r test
 ```
 
-## Adding New Packages
+### Accessing the Application
 
-To add a new shared package:
-
-```bash
-mkdir -p packages/package-name
-cd packages/package-name
-pnpm init
-```
-
-To add a new application:
-
-```bash
-mkdir -p apps/app-name
-cd apps/app-name
-pnpm init
-```
-
-## Workspace Commands
-
-- `pnpm -r build` - Build all packages
-- `pnpm -r dev` - Start development mode for all packages
-- `pnpm -r test` - Run tests for all packages
-- `pnpm --filter <package-name> <command>` - Run a command for a specific package
+- **API**: http://localhost:3000/api
+- **Web Frontend**: http://localhost:8080 (or http://localhost:8081 if port 8080 is in use)
