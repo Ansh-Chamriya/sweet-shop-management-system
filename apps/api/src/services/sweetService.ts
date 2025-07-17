@@ -60,10 +60,49 @@ export class SweetService {
           : asc(schema.sweets.name);
     }
 
-    // Execute the query using Drizzle's findMany
     return this.db.query.sweets.findMany({
       where: conditions.length > 0 ? and(...conditions) : undefined,
       orderBy: orderByClause,
     });
+  }
+
+  async purchaseSweet(sweetId: number, quantityToPurchase: number) {
+    const [sweet] = await this.getSweetById(sweetId);
+
+    if (!sweet) {
+      throw new Error("Sweet not found.");
+    }
+
+    if (sweet?.quantity < quantityToPurchase) {
+      throw new Error("Insufficient stock available.");
+    }
+
+    const newQuantity = sweet?.quantity - quantityToPurchase;
+
+    const [updatedSweet] = await this.db
+      .update(schema.sweets)
+      .set({ quantity: newQuantity })
+      .where(eq(schema.sweets.id, sweetId))
+      .returning();
+
+    return updatedSweet;
+  }
+
+  async restockSweet(sweetId: number, quantityToAdd: number) {
+    const [sweet] = await this.getSweetById(sweetId);
+
+    if (!sweet) {
+      throw new Error("Sweet not found.");
+    }
+
+    const newQuantity = sweet?.quantity + quantityToAdd;
+
+    const [updatedSweet] = await this.db
+      .update(schema.sweets)
+      .set({ quantity: newQuantity })
+      .where(eq(schema.sweets.id, sweetId))
+      .returning();
+
+    return updatedSweet;
   }
 }

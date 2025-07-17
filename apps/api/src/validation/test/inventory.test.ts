@@ -35,7 +35,7 @@ describe("SweetService: Inventory Management Unit Tests", () => {
       expect(updatedSweet.quantity).toBe(15);
 
       // Verify the change in the database directly
-      const dbSweet = await service.getSweetById(testSweetId);
+      const [dbSweet] = await service.getSweetById(testSweetId);
       expect(dbSweet?.quantity).toBe(15);
     });
 
@@ -64,7 +64,7 @@ describe("SweetService: Inventory Management Unit Tests", () => {
 
       expect(updatedSweet.quantity).toBe(50);
 
-      const dbSweet = await service.getSweetById(testSweetId);
+      const [dbSweet] = await service.getSweetById(testSweetId);
       expect(dbSweet?.quantity).toBe(50);
     });
 
