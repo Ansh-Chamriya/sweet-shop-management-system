@@ -105,4 +105,18 @@ export class SweetService {
 
     return updatedSweet;
   }
+
+  async deleteSweet(sweetId: number) {
+    const [sweetToDelete] = await this.getSweetById(sweetId);
+    if (!sweetToDelete) {
+      return Promise.reject(new Error("Sweet not found."));
+    }
+
+    const [deletedSweet] = await this.db
+      .delete(schema.sweets)
+      .where(eq(schema.sweets.id, sweetId))
+      .returning();
+
+    return deletedSweet;
+  }
 }

@@ -38,7 +38,7 @@ describe("SweetService: Delete Sweets Unit Tests", () => {
 
     // Verify: Attempt to fetch the sweet again and expect it to be gone
     const result = await service.getSweetById(sweetId);
-    expect(result).toBeNull();
+    expect(result.length).toBe(0);
   });
 
   it("should throw an error when trying to delete a sweet that does not exist", async () => {
