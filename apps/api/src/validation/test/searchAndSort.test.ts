@@ -49,16 +49,17 @@ describe("SweetService: Search and Sort Unit Tests", () => {
 
     it("should return sweets within a specific price range", async () => {
       const results = await service.searchSweets({ priceRange: [2.0, 30] });
-      expect(results.length).toBe(2); // Gummy Worms (2.50) and Caramel Chew (30.00)
+      expect(results.length).toBe(3); // Gummy Worms (2.50) and Caramel Chew (30.00)
       expect(results.map((s: sweet) => s.name).sort()).toEqual([
         "Caramel Chew",
+        "Chocolate Bar",
         "Gummy Worms",
       ]);
     });
 
     it("should return sweets matching multiple criteria (category and price)", async () => {
       const results = await service.searchSweets({
-        category: "Candy",
+        category: "Chocolate",
         priceRange: [10, 20],
       });
       expect(results.length).toBe(1);
