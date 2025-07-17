@@ -40,21 +40,29 @@
     /* Custom design tokens */
     --success: 160 84% 39%;
     --success-foreground: 0 0% 98%;
-    
+
     --warning: 48 96% 53%;
     --warning-foreground: 0 0% 9%;
-    
+
     --info: 221 83% 53%;
     --info-foreground: 0 0% 98%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(160 84% 45%));
-    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(240 10% 10%));
-    
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(160 84% 45%)
+    );
+    --gradient-card: linear-gradient(
+      135deg,
+      hsl(var(--card)),
+      hsl(240 10% 10%)
+    );
+
     /* Shadows */
     --shadow-card: 0 4px 12px -4px hsl(0 0% 0% / 0.4);
     --shadow-button: 0 2px 8px -2px hsl(var(--primary) / 0.3);
-    
+
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -120,7 +128,13 @@
     @apply border-border;
   }
 
+  html,
   body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
     @apply bg-background text-foreground font-sans;
   }
 }

@@ -3,6 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { BetterSQLite3Database, drizzle } from "drizzle-orm/better-sqlite3";
 import { z } from "zod";
 import { serve } from "@hono/node-server";
+import { cors } from "hono/cors";
 import * as schema from "./db/schema";
 import { SweetService } from "./services/sweetService";
 import { createSweetSchema, updateSweetSchema } from "./validation/schema";
@@ -14,6 +15,23 @@ import Database from "better-sqlite3";
 export const createApp = (db: BetterSQLite3Database<typeof schema>) => {
   const sweetService = new SweetService(db);
   const app = new Hono();
+
+  // Add CORS middleware to allow requests from the frontend
+  app.use(
+    "/*",
+    cors({
+      origin: [
+        "http://localhost:5173",
+        "http://localhost:3001",
+        "http://localhost:8080",
+      ],
+      allowHeaders: ["Content-Type", "Authorization"],
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      exposeHeaders: ["Content-Length", "X-Total-Count"],
+      maxAge: 600,
+      credentials: true,
+    })
+  );
 
   // --- API Routes ---
   const apiRoutes = app.basePath("/api");
