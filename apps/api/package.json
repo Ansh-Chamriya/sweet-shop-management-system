@@ -9,19 +9,26 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "db:migrate": "drizzle-kit migrate",
-    "db:generate": "drizzle-kit generate:sqlite",
-    "db:studio": "drizzle-kit studio"
+    "migrate": " drizzle-kit migrate",
+    "generate": "drizzle-kit generate",
+    "studio": "drizzle-kit studio",
+    "seed": "tsx src/db/seed.ts",
+    "setup": "pnpm generate && pnpm migrate && pnpm seed"
   },
   "dependencies": {
+    "@hono/node-server": "^1.16.0",
+    "better-sqlite3": "^12.2.0",
+    "drizzle-orm": "^0.44.3",
+    "drizzle-seed": "^0.3.1",
     "hono": "^4.8.5",
-    "drizzle-orm": "^0.29.3",
-    "better-sqlite3": "^9.4.3"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.20.10",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.11.5",
+    "@types/sqlite3": "^3.1.11",
+    "drizzle-kit": "^0.31.4",
     "tsx": "^4.7.0",
-    "typescript": "^5.4.2",
-    "@types/better-sqlite3": "^7.6.9"
+    "typescript": "^5.4.2"
   }
 }
