@@ -15,3 +15,4 @@ export const createSweetSchema = z.object({
 
 // A separate schema for updates, where all fields are optional.
 export const updateSweetSchema = createSweetSchema.partial();
+export type sweet = z.infer<typeof createSweetSchema>;
