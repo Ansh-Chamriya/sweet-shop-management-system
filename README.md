@@ -53,3 +53,27 @@ pnpm -r test
 
 - **API**: http://localhost:3000/api
 - **Web Frontend**: http://localhost:8080 (or http://localhost:8081 if port 8080 is in use)
+
+## 📊 Test Reports
+
+Below is the test coverage report for the Sweet Shop Management System:
+
+![Test Coverage Report](./test-report.png)
+
+## 📱 Application Screenshots
+
+### Dashboard View
+
+![Dashboard View](./screenshots/ss-1.png)
+
+### Sweet Management Interface
+
+![Sweet Management](./screenshots/ss-2.png)
+
+### Adding New Sweet
+
+![Add Sweet Form](./screenshots/ss-3.png)
+
+### Filter and Search Functionality
+
+![Search and Filter](./screenshots/ss-4.png)
