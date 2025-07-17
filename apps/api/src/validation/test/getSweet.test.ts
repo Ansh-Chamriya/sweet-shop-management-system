@@ -2,6 +2,8 @@ import Database from "better-sqlite3";
 import { BetterSQLite3Database, drizzle } from "drizzle-orm/better-sqlite3";
 import { beforeEach, describe, expect, it } from "vitest";
 import { schema } from "../../db";
+import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { SweetService } from "../../services/sweetService";
 
 describe("getSweets: Data Retrieval Unit Tests", () => {
   let db: BetterSQLite3Database<typeof schema>;
@@ -10,6 +12,7 @@ describe("getSweets: Data Retrieval Unit Tests", () => {
   beforeEach(() => {
     const sqlite = new Database(":memory:");
     db = drizzle(sqlite, { schema });
+    migrate(db, { migrationsFolder: "src/db/migrations" });
     service = new SweetService(db);
   });
 
@@ -46,8 +49,8 @@ describe("getSweets: Data Retrieval Unit Tests", () => {
     const sweet = await service.getSweetById(insertedSweet.id);
 
     expect(sweet).not.toBeNull();
-    expect(sweet?.id).toBe(insertedSweet.id);
-    expect(sweet?.name).toBe("Tart");
+    expect(sweet[0]?.id).toBe(insertedSweet.id);
+    expect(sweet[0]?.name).toBe("Tart");
   });
 
   it("getSweetById should return null for a non-existent ID", async () => {
@@ -55,6 +58,6 @@ describe("getSweets: Data Retrieval Unit Tests", () => {
 
     const sweet = await service.getSweetById(nonExistentId);
 
-    expect(sweet).toBeNull();
+    expect(sweet).toEqual([]);
   });
 });
