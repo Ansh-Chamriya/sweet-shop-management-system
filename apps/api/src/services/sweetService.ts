@@ -1,6 +1,8 @@
 import { eq, and, like, gte, lte, asc, desc } from "drizzle-orm";
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import * as schema from "../db/schema";
+import type { sweet } from "../validation/schema";
+
 export interface SearchCriteria {
   name?: string;
   category?: string;
@@ -17,6 +19,15 @@ export class SweetService {
 
   constructor(db: BetterSQLite3Database<typeof schema>) {
     this.db = db;
+  }
+
+  async createSweet(sweetData: sweet) {
+    const [createdSweet] = await this.db
+      .insert(schema.sweets)
+      .values(sweetData)
+      .returning();
+
+    return createdSweet;
   }
 
   async getAllSweets() {

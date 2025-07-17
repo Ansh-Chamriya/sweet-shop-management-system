@@ -14,7 +14,7 @@ describe("SweetService: Search and Sort Unit Tests", () => {
   beforeEach(async () => {
     const sqlite = new Database(":memory:");
     db = drizzle(sqlite, { schema });
-    migrate(db, { migrationsFolder: "src/db/migrations" });
+    migrate(db, { migrationsFolder: "./src/db/migrations" });
     service = new SweetService(db);
 
     // Seed data for testing search and sort

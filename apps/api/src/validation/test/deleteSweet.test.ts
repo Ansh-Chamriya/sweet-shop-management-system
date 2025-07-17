@@ -13,7 +13,7 @@ describe("SweetService: Delete Sweets Unit Tests", () => {
   beforeEach(async () => {
     const sqlite = new Database(":memory:");
     db = drizzle(sqlite, { schema });
-    migrate(db, { migrationsFolder: "src/db/migrations" });
+    migrate(db, { migrationsFolder: "./src/db/migrations" });
     service = new SweetService(db);
 
     // Seed a sweet to be deleted in the tests

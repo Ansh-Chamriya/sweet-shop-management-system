@@ -12,7 +12,7 @@ describe("getSweets: Data Retrieval Unit Tests", () => {
   beforeEach(() => {
     const sqlite = new Database(":memory:");
     db = drizzle(sqlite, { schema });
-    migrate(db, { migrationsFolder: "src/db/migrations" });
+    migrate(db, { migrationsFolder: "./src/db/migrations" });
     service = new SweetService(db);
   });
 
